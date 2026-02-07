@@ -12,6 +12,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Components
 import Login from './components/Login';
@@ -53,35 +54,37 @@ function App() {
     }
 
     return (
-        <Router>
-            <div className="app">
-                {user && <Navbar user={user} />}
+        <ThemeProvider>
+            <Router>
+                <div className="app">
+                    {user && <Navbar user={user} />}
 
-                <Routes>
-                    {/* Public Routes */}
-                    <Route
-                        path="/login"
-                        element={user ? <Navigate to="/chat" /> : <Login />}
-                    />
-                    <Route
-                        path="/register"
-                        element={user ? <Navigate to="/chat" /> : <Register />}
-                    />
+                    <Routes>
+                        {/* Public Routes */}
+                        <Route
+                            path="/login"
+                            element={user ? <Navigate to="/chat" /> : <Login />}
+                        />
+                        <Route
+                            path="/register"
+                            element={user ? <Navigate to="/chat" /> : <Register />}
+                        />
 
-                    {/* Protected Route */}
-                    <Route
-                        path="/chat"
-                        element={user ? <Chat user={user} /> : <Navigate to="/login" />}
-                    />
+                        {/* Protected Route */}
+                        <Route
+                            path="/chat"
+                            element={user ? <Chat user={user} /> : <Navigate to="/login" />}
+                        />
 
-                    {/* Default Route */}
-                    <Route
-                        path="/"
-                        element={<Navigate to={user ? "/chat" : "/login"} />}
-                    />
-                </Routes>
-            </div>
-        </Router>
+                        {/* Default Route */}
+                        <Route
+                            path="/"
+                            element={<Navigate to={user ? "/chat" : "/login"} />}
+                        />
+                    </Routes>
+                </div>
+            </Router>
+        </ThemeProvider>
     );
 }
 

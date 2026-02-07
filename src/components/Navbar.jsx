@@ -11,9 +11,11 @@ import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = ({ user }) => {
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
 
     /**
      * Handle Logout
@@ -39,6 +41,9 @@ const Navbar = ({ user }) => {
                 {user && (
                     <>
                         <span className="user-email">{user.email}</span>
+                        <button onClick={toggleTheme} className="btn-theme-toggle" title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>
+                            {theme === 'dark' ? '☀️' : '🌙'}
+                        </button>
                         <button onClick={handleLogout} className="btn-secondary">
                             Logout
                         </button>

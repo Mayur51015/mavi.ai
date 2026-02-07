@@ -1,15 +1,78 @@
 /**
- * App Styles - MaVi GPT
+ * App Styles - MaVi GPT with Glassmorphism
  * 
- * GREEN CODING CSS PRINCIPLES:
- * - Minimal styling with simple colors
- * - No heavy animations or transitions
- * - No background images or videos
- * - Simple gradients only where necessary
- * - Optimized for performance and low energy consumption
+ * Enhanced with vibrant colors and glassmorphic design
+ * Supports light and dark themes with smooth transitions
  */
 
-/* Global Styles */
+/* ============================================
+   CSS CUSTOM PROPERTIES - THEME VARIABLES
+   ============================================ */
+
+:root {
+  /* Light Theme Colors - Vibrant & Premium */
+  --bg-primary: linear-gradient(135deg, #e0f7ff 0%, #f0e7ff 50%, #ffe7f0 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.25);
+  --bg-card: rgba(255, 255, 255, 0.35);
+  --bg-navbar: rgba(255, 255, 255, 0.2);
+  --bg-input: rgba(255, 255, 255, 0.4);
+  --bg-message-user: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-message-ai: rgba(255, 255, 255, 0.3);
+
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a68;
+  --text-muted: #6a6a88;
+  --text-on-accent: #ffffff;
+
+  --accent-primary: #667eea;
+  --accent-secondary: #764ba2;
+  --accent-tertiary: #f093fb;
+
+  --border-color: rgba(103, 126, 234, 0.2);
+  --border-hover: rgba(103, 126, 234, 0.5);
+
+  --shadow-sm: 0 4px 16px rgba(103, 126, 234, 0.1);
+  --shadow-md: 0 8px 32px rgba(103, 126, 234, 0.15);
+  --shadow-lg: 0 12px 48px rgba(103, 126, 234, 0.2);
+
+  --glass-blur: 20px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Colors - Vibrant Cyber Aesthetic */
+  --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  --bg-secondary: rgba(30, 30, 46, 0.4);
+  --bg-card: rgba(42, 42, 74, 0.5);
+  --bg-navbar: rgba(26, 26, 46, 0.6);
+  --bg-input: rgba(30, 30, 50, 0.6);
+  --bg-message-user: linear-gradient(135deg, #00f5ff 0%, #0088ff 100%);
+  --bg-message-ai: rgba(42, 42, 74, 0.4);
+
+  --text-primary: #e0e0ff;
+  --text-secondary: #b0b0d0;
+  --text-muted: #8a8ab0;
+  --text-on-accent: #0a0a1a;
+
+  --accent-primary: #00f5ff;
+  --accent-secondary: #0088ff;
+  --accent-tertiary: #00d9ff;
+
+  --border-color: rgba(0, 245, 255, 0.2);
+  --border-hover: rgba(0, 245, 255, 0.6);
+
+  --shadow-sm: 0 4px 16px rgba(0, 217, 255, 0.1);
+  --shadow-md: 0 8px 32px rgba(0, 217, 255, 0.15);
+  --shadow-lg: 0 12px 48px rgba(0, 217, 255, 0.2);
+
+  --glass-blur: 24px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -22,8 +85,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #0f0f1a;
-  color: #e0e0e0;
+  background: var(--bg-primary);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .app {
@@ -32,25 +97,41 @@ body {
   flex-direction: column;
 }
 
-/* Navbar Styles */
+/* ============================================
+   NAVBAR STYLES - Glassmorphic
+   ============================================ */
+
 .navbar {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: var(--bg-navbar);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #2a2a4a;
+  border-bottom: var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .navbar-brand h1 {
-  font-size: 1.8rem;
-  color: #00d9ff;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 0.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .navbar-subtitle {
   font-size: 0.9rem;
-  color: #8a8a9e;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .navbar-actions {
@@ -60,25 +141,49 @@ body {
 }
 
 .user-email {
-  color: #b0b0c0;
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
-/* Buttons */
+/* ============================================
+   BUTTONS - Enhanced with Glassmorphism
+   ============================================ */
+
 .btn-primary {
-  background: linear-gradient(135deg, #00d9ff 0%, #0088cc 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: var(--text-on-accent);
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   cursor: pointer;
   width: 100%;
   font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover:not(:disabled)::before {
+  left: 100%;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00b8e6 0%, #006699 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary:disabled {
@@ -87,34 +192,68 @@ body {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: #00d9ff;
-  border: 2px solid #00d9ff;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--accent-primary);
+  border: 2px solid var(--border-color);
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--border-hover);
+  background: var(--bg-input);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-theme-toggle {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  min-width: 45px;
+  min-height: 40px;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-input);
+  transform: rotate(20deg) scale(1.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-send {
-  background: linear-gradient(135deg, #00d9ff 0%, #0088cc 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: var(--text-on-accent);
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
   min-width: 100px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-send:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00b8e6 0%, #006699 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-send:disabled {
@@ -122,39 +261,54 @@ body {
   cursor: not-allowed;
 }
 
-/* Authentication Styles */
+/* ============================================
+   AUTHENTICATION STYLES - Glassmorphic Cards
+   ============================================ */
+
 .auth-container {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+  background: var(--bg-primary);
 }
 
 .auth-card {
-  background: #1e1e2e;
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 420px;
-  border: 1px solid #2a2a4a;
+  border: var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(103, 126, 234, 0.1);
 }
 
 .auth-card h1 {
   text-align: center;
-  color: #00d9ff;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.875rem;
+  font-weight: 800;
 }
 
 .auth-card h2 {
   text-align: center;
-  color: #b0b0c0;
+  color: var(--text-primary);
   margin-bottom: 2rem;
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .form-group {
@@ -164,24 +318,28 @@ body {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #b0b0c0;
+  color: var(--text-secondary);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #2a2a4a;
-  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
   font-size: 1rem;
-  background: #16162a;
-  color: #e0e0e0;
+  background: var(--bg-input);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #00d9ff;
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 3px rgba(103, 126, 234, 0.1);
 }
 
 .form-group input:disabled {
@@ -190,33 +348,40 @@ body {
 }
 
 .error-message {
-  background: rgba(255, 68, 68, 0.1);
+  background: rgba(255, 68, 68, 0.15);
   color: #ff4444;
-  padding: 0.75rem;
-  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   border-left: 4px solid #ff4444;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .auth-switch {
   text-align: center;
   margin-top: 1.5rem;
-  color: #8a8a9e;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
 .auth-switch a {
-  color: #00d9ff;
+  color: var(--accent-primary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
 .auth-switch a:hover {
   text-decoration: underline;
+  color: var(--accent-secondary);
 }
 
-/* Chat Styles */
+/* ============================================
+   CHAT STYLES - Glassmorphic Interface
+   ============================================ */
+
 .chat-container {
   flex: 1;
   display: flex;
@@ -225,44 +390,67 @@ body {
   margin: 0 auto;
   width: 100%;
   padding: 0 1rem;
+  position: relative;
+  min-height: 0;
 }
 
 .chat-header {
   padding: 2rem 0 1rem;
   text-align: center;
-  border-bottom: 2px solid #2a2a4a;
+  border-bottom: var(--glass-border);
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px 16px 0 0;
+  margin-top: 1rem;
 }
 
 .chat-header h2 {
-  color: #00d9ff;
-  font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  font-weight: 800;
 }
 
 .chat-subtitle {
-  color: #8a8a9e;
+  color: var(--text-muted);
   font-size: 1rem;
+  font-weight: 500;
 }
 
 .messages-container {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem 0;
+  overflow-x: hidden;
+  padding: 2rem 1rem;
+  padding-bottom: 10rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  scroll-behavior: smooth;
+  min-height: 0;
 }
 
 .welcome-message {
   text-align: center;
   padding: 3rem 2rem;
-  color: #b0b0c0;
+  color: var(--text-secondary);
 }
 
 .welcome-message h3 {
-  color: #00d9ff;
-  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.8rem;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .welcome-message p {
@@ -279,6 +467,19 @@ body {
 .message {
   display: flex;
   margin-bottom: 1rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .message.user {
@@ -292,53 +493,96 @@ body {
 .message-content {
   max-width: 70%;
   padding: 1rem 1.25rem;
-  border-radius: 12px;
-  line-height: 1.5;
+  border-radius: 16px;
+  line-height: 1.6;
   font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.message-content:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .message.user .message-content {
-  background: linear-gradient(135deg, #00d9ff 0%, #0088cc 100%);
-  color: white;
+  background: var(--bg-message-user);
+  color: var(--text-on-accent);
   border-bottom-right-radius: 4px;
+  border: var(--glass-border);
 }
 
 .message.ai .message-content {
-  background: #1e1e2e;
-  color: #e0e0e0;
-  border: 1px solid #2a2a4a;
+  background: var(--bg-message-ai);
+  color: var(--text-primary);
+  border: var(--glass-border);
   border-bottom-left-radius: 4px;
 }
 
 .typing {
   font-style: italic;
   opacity: 0.8;
+  animation: pulse 1.5s ease infinite;
 }
 
-/* Input Styles */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   INPUT STYLES - Glassmorphic
+   ============================================ */
+
 .input-container {
-  padding: 1.5rem 0;
-  border-top: 2px solid #2a2a4a;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 1.5rem 1rem;
+  border-top: var(--glass-border);
   display: flex;
   gap: 1rem;
   align-items: flex-end;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 0 0 16px 16px;
+  z-index: 50;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  border: var(--glass-border);
+  border-top-width: 2px;
 }
 
 .input-container textarea {
   flex: 1;
   padding: 0.75rem 1rem;
-  border: 2px solid #2a2a4a;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 1rem;
   resize: none;
   font-family: inherit;
-  background: #1e1e2e;
-  color: #e0e0e0;
+  background: var(--bg-input);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  line-height: 1.5;
 }
 
 .input-container textarea:focus {
   outline: none;
-  border-color: #00d9ff;
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 3px rgba(103, 126, 234, 0.1);
 }
 
 .input-container textarea:disabled {
@@ -346,56 +590,126 @@ body {
   cursor: not-allowed;
 }
 
-/* Loading Spinner */
+.input-container textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+
 .loading-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+  background: var(--bg-primary);
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #2a2a4a;
-  border-top-color: #00d9ff;
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--accent-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-container p {
-  margin-top: 1rem;
-  color: #8a8a9e;
+  margin-top: 1.5rem;
+  color: var(--text-muted);
   font-size: 1.1rem;
+  font-weight: 500;
 }
 
-/* Responsive Design - GREEN CODING: Simple breakpoints */
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: var(--bg-card);
+  border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1rem;
   }
-  
+
+  .navbar-brand h1 {
+    font-size: 1.5rem;
+  }
+
+  .navbar-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .user-email {
+    width: 100%;
+    text-align: center;
+  }
+
   .message-content {
     max-width: 85%;
   }
-  
+
   .auth-card {
     padding: 2rem;
   }
-  
+
   .input-container {
     flex-direction: column;
   }
-  
+
   .btn-send {
     width: 100%;
+  }
+
+  .chat-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand h1 {
+    font-size: 1.3rem;
+  }
+
+  .auth-card h1 {
+    font-size: 2rem;
+  }
+
+  .message-content {
+    max-width: 90%;
+    font-size: 0.9rem;
   }
 }
