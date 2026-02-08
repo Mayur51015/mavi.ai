@@ -378,6 +378,38 @@ body {
   color: var(--accent-secondary);
 }
 
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.home-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-input);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  color: var(--accent-primary);
+}
+
+.auth-card {
+  position: relative;
+}
+
 /* ============================================
    CHAT STYLES - Glassmorphic Interface
    ============================================ */

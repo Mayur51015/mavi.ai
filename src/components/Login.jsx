@@ -11,7 +11,7 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     // GREEN CODING: Minimal state - only what's necessary
@@ -53,6 +53,9 @@ const Login = () => {
     return (
         <div className="auth-container">
             <div className="auth-card">
+                <Link to="/" className="home-btn" aria-label="Go to home">
+                    🏠 Home
+                </Link>
                 <h1>MaVi GPT</h1>
                 <h2>Login</h2>
 

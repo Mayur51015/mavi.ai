@@ -19,9 +19,11 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Chat from './components/Chat';
 import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
 
 // Import styles
 import './App.css';
+import './components/LandingPage.css';
 
 function App() {
     // GREEN CODING: Single state for authentication
@@ -76,10 +78,10 @@ function App() {
                             element={user ? <Chat user={user} /> : <Navigate to="/login" />}
                         />
 
-                        {/* Default Route */}
+                        {/* Landing Page - Default Route */}
                         <Route
                             path="/"
-                            element={<Navigate to={user ? "/chat" : "/login"} />}
+                            element={user ? <Navigate to="/chat" /> : <LandingPage />}
                         />
                     </Routes>
                 </div>
